@@ -1,0 +1,35 @@
+@model FiveADay
+
+@{
+    <div asp-validation-summary="All"></div>
+    string createOrEdit = Model.Id == 0 ? "Create" : "Edit";
+    <form method="post">
+
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"> Name </label>
+            <div class="d-flex gap-3">
+                <input asp-for="Name" type="text" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"> Stars </label>
+            <div class="btn-group" role="group">
+                @for (int i = 1; i < 6; i++)
+                {
+                    string starString = "";
+                    for (int j = 0; j < i; j++)
+                    {
+                        starString += "\u2B50";
+                    }
+
+
+                    <input type="radio" class="btn-check" asp-for="Stars" id="@( "r" + i)" value="@i" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="@( "r" + i)">@starString</label>
+
+                    }
+                </div>
+            </div>
+            <button class="btn btn-success"> @createOrEdit Fruit/Veg </button>
+        </form>
+    }
